@@ -1,16 +1,13 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { HeaderComponent } from '@libs/ui/header/header.component'
 
 @Component({
   selector: 'jt-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent],
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
+    <header jt-header></header>
     <router-outlet />
   `,
-  styles: [],
 })
-export class AppComponent {
-  title = 'json-tiles';
-}
+export class AppComponent {}

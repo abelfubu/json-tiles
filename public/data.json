@@ -1,0 +1,78 @@
+{
+  "$schema": "./tiles-schema.json",
+  "tiles": [
+    {
+      "title": "Aprovisionar empresa",
+      "url": "/api/company/new-company",
+      "params": [
+        {
+          "label": "Antifraude",
+          "field": "laftActivated",
+          "type": "checkbox",
+          "value": true
+        },
+        {
+          "label": "Nombre",
+          "field": "name",
+          "type": "text",
+          "value": ""
+        },
+        {
+          "label": "Cliente",
+          "field": "client",
+          "type": "text",
+          "value": "Id del cliente"
+        }
+      ]
+    },
+    {
+      "title": "Activar feature",
+      "url": "/api/features/new-feature",
+      "params": [
+        {
+          "label": "Nombre",
+          "field": "name",
+          "type": "text",
+          "value": ""
+        },
+        {
+          "label": "Cliente",
+          "field": "client",
+          "type": "select",
+          "url": "https://jsonplaceholder.typicode.com/users?limit=10",
+          "labelKey": "name",
+          "valueKey": "id",
+          "value": "Id del cliente"
+        },
+        {
+          "label": "Nombre",
+          "field": "name",
+          "type": "text",
+          "value": ""
+        },
+        {
+          "label": "Cliente",
+          "field": "client",
+          "type": "select",
+          "url": "https://jsonplaceholder.typicode.com/users?limit=10",
+          "labelKey": "name",
+          "valueKey": "id",
+          "value": "Id del cliente"
+        }
+      ]
+    },
+    {
+      "title": "Preparar Ramen",
+      "url": "/api/ramen/kobuta-ramen",
+      "confirmation": "Seguro que quieres preparar un ramen?",
+      "params": [
+        {
+          "label": "Con picante",
+          "field": "spicy",
+          "type": "checkbox",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

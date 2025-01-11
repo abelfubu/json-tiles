@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "Wolters Kluwer Factura Backoffice tiles schema",
+  "type": "object",
+  "properties": {
+    "$schema": { "type": "string" },
+    "tiles": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Tile" }
+    }
+  },
+  "required": ["tiles"],
+  "definitions": {
+    "BaseTileParams": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "field": { "type": "string" },
+        "type": { "type": "string", "enum": ["text", "checkbox", "number"] },
+        "value": { "type": ["string", "boolean", "number"] }
+      },
+      "required": ["label", "field", "type"]
+    },
+    "SelectTileParams": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "field": { "type": "string" },
+        "type": { "type": "string", "enum": ["select"] },
+        "url": { "type": "string" },
+        "labelKey": { "type": "string" },
+        "valueKey": { "type": "string" },
+        "value": { "type": ["string", "boolean", "number"] }
+      },
+      "required": ["label", "field", "type", "url", "labelKey", "valueKey"]
+    },
+    "TileParams": {
+      "oneOf": [
+        { "$ref": "#/definitions/BaseTileParams" },
+        { "$ref": "#/definitions/SelectTileParams" }
+      ]
+    },
+    "Tile": {
+      "type": "object",
+      "title": "Tile to be rendered in the dashboard",
+      "properties": {
+        "title": { "type": "string" },
+        "url": { "type": "string" },
+        "params": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TileParams"
+          }
+        }
+      },
+      "required": ["title", "url", "params"]
+    }
+  }
+}
