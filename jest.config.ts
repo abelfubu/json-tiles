@@ -7,9 +7,7 @@ const jestConfig: JestConfigWithTsJest = {
   roots: ['<rootDir>'],
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   modulePaths: [compilerOptions.baseUrl],
-  moduleNameMapper: pathsToModuleNameMapper(
-    compilerOptions.paths /*, { prefix: '<rootDir>/' } */,
-  ),
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
 }
 
 export default jestConfig
