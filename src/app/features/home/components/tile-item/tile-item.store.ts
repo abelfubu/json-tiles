@@ -9,7 +9,10 @@ export class TileItemStore {
   private readonly tileState = signal<{
     tile: Tile
     dropdownOptions: Record<string, unknown>
-  }>({ tile: { id: '', params: [], url: '', title: '' }, dropdownOptions: {} })
+  }>({
+    tile: { id: '', params: [], url: '', method: 'POST', title: '' },
+    dropdownOptions: {},
+  })
 
   readonly tile = computed(() => this.tileState().tile)
   readonly options = computed(() => this.tileState().dropdownOptions)
@@ -55,7 +58,20 @@ export class TileItemStore {
     }))
   }
 
-  getRequestBody() {
+  onAccept({ confirmation, method, url }: Tile): void {
+    if (!confirmation) {
+      console.log(method, url, this.getRequestBody())
+      return
+    }
+
+    const response = confirm(this.tile().confirmation)
+
+    if (response) {
+      console.log(this.tile().method, this.tile().url, this.getRequestBody())
+    }
+  }
+
+  private getRequestBody() {
     return this.tileState().tile.params.reduce(
       (body, param) => ({ ...body, [param.field]: param.value }),
       {},

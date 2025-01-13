@@ -57,9 +57,9 @@ export class TileComponent {
   private readonly store = inject(TileItemStore)
   readonly tile = input.required<Tile>()
 
-  init = effect(() => {
+  constructor() {
     this.store.init(this.tile())
-  })
+  }
 
   protected readonly paramsComponentMap: Record<
     TileParams['type'],
@@ -82,14 +82,22 @@ export class TileComponent {
     const confirmation = this.tile().confirmation
 
     if (!confirmation) {
-      console.log(this.tile().url, this.store.getRequestBody())
+      console.log(
+        this.tile().method,
+        this.tile().url,
+        this.store.getRequestBody(),
+      )
       return
     }
 
     const response = confirm(this.tile().confirmation)
 
     if (response) {
-      console.log(this.tile().url, this.store.getRequestBody())
+      console.log(
+        this.tile().method,
+        this.tile().url,
+        this.store.getRequestBody(),
+      )
     }
   }
 }

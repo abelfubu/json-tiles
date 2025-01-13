@@ -1,9 +1,9 @@
 {
-  "$schema": "./tiles-schema.json",
   "tiles": [
     {
       "title": "Aprovisionar empresa",
       "url": "/api/company/new-company",
+      "method": "POST",
       "params": [
         {
           "label": "Antifraude",
@@ -19,7 +19,7 @@
         },
         {
           "label": "Cliente",
-          "field": "client",
+          "field": "tenantId",
           "type": "text",
           "value": "Id del cliente"
         }
@@ -28,22 +28,8 @@
     {
       "title": "Activar feature",
       "url": "/api/features/new-feature",
+      "method": "POST",
       "params": [
-        {
-          "label": "Nombre",
-          "field": "name",
-          "type": "text",
-          "value": ""
-        },
-        {
-          "label": "Cliente",
-          "field": "client",
-          "type": "select",
-          "url": "https://jsonplaceholder.typicode.com/users?limit=10",
-          "labelKey": "name",
-          "valueKey": "id",
-          "value": "Id del cliente"
-        },
         {
           "label": "Nombre",
           "field": "name",
@@ -64,6 +50,7 @@
     {
       "title": "Preparar Ramen",
       "url": "/api/ramen/kobuta-ramen",
+      "method": "POST",
       "confirmation": "Seguro que quieres preparar un ramen?",
       "params": [
         {
