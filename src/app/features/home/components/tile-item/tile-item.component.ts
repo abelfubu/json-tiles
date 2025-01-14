@@ -1,14 +1,14 @@
-import { Component, computed, effect, inject, input, Type } from '@angular/core'
+import { NgComponentOutlet } from '@angular/common'
+import { Component, computed, inject, input, OnInit, Type } from '@angular/core'
 import { TileParams } from '@domain/tile/tile-params.model'
 import { Tile } from '@domain/tile/tile.model'
+import { ParamComponent } from '@features/home/models/param-component.model'
 import { ButtonComponent } from '@libs/ui/button/button.component'
-import { TileItemStore } from './tile-item.store'
-import { NgComponentOutlet } from '@angular/common'
+import { ChecboxParamComponent } from '../checkbox-param/checkbox-param.component'
+import { NumberParamComponent } from '../number-param/number-param.component'
 import { SelectParamComponent } from '../select-param/select-param.component'
 import { TextParamComponent } from '../text-param/text-param.component'
-import { ParamComponent } from '@features/home/models/param-component.model'
-import { NumberParamComponent } from '../number-param/number-param.component'
-import { ChecboxParamComponent } from '../checkbox-param/checkbox-param.component'
+import { TileItemStore } from './tile-item.store'
 
 @Component({
   selector: 'jt-tile',
@@ -24,7 +24,9 @@ import { ChecboxParamComponent } from '../checkbox-param/checkbox-param.componen
     </div>
 
     <div class="tile-actions">
-      <button jt-button class="align-end" (click)="onAccept()">Aceptar</button>
+      <button jt-button class="align-end" (click)="store.onAccept(tile())">
+        Aceptar
+      </button>
     </div>
   `,
 
@@ -53,11 +55,11 @@ import { ChecboxParamComponent } from '../checkbox-param/checkbox-param.componen
     }
   `,
 })
-export class TileComponent {
-  private readonly store = inject(TileItemStore)
+export class TileComponent implements OnInit {
+  protected readonly store = inject(TileItemStore)
   readonly tile = input.required<Tile>()
 
-  constructor() {
+  ngOnInit(): void {
     this.store.init(this.tile())
   }
 
@@ -77,27 +79,4 @@ export class TileComponent {
       component: this.paramsComponentMap[param.type],
     })),
   )
-
-  onAccept(): void {
-    const confirmation = this.tile().confirmation
-
-    if (!confirmation) {
-      console.log(
-        this.tile().method,
-        this.tile().url,
-        this.store.getRequestBody(),
-      )
-      return
-    }
-
-    const response = confirm(this.tile().confirmation)
-
-    if (response) {
-      console.log(
-        this.tile().method,
-        this.tile().url,
-        this.store.getRequestBody(),
-      )
-    }
-  }
 }

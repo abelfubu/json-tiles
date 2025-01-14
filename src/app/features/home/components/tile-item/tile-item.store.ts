@@ -1,15 +1,18 @@
-import { HttpClient } from '@angular/common/http'
 import { computed, inject, Injectable, signal } from '@angular/core'
-import { TileParams } from '@domain/tile/tile-params.model'
+import { DropdownDataService } from '@core/services/dropdown-data.service'
+import { SelectTileParams } from '@domain/tile/select-tile-params.model'
 import { Tile } from '@domain/tile/tile.model'
+import { map } from 'rxjs'
+
+interface TileItemState {
+  tile: Tile
+  dropdownOptions: Record<string, unknown>
+}
 
 @Injectable()
 export class TileItemStore {
-  private readonly http = inject(HttpClient)
-  private readonly tileState = signal<{
-    tile: Tile
-    dropdownOptions: Record<string, unknown>
-  }>({
+  private readonly dropdownData = inject(DropdownDataService)
+  private readonly tileState = signal<TileItemState>({
     tile: { id: '', params: [], url: '', method: 'POST', title: '' },
     dropdownOptions: {},
   })
@@ -21,22 +24,24 @@ export class TileItemStore {
     this.tileState.update((state) => ({ ...state, tile }))
   }
 
-  getDropdownOptions(param: TileParams) {
-    if (param.type !== 'select') {
+  getDropdownOptions({ url, type, labelKey, valueKey, id }: SelectTileParams) {
+    if (type !== 'select') {
       throw new Error('Only select type is supported')
     }
 
-    this.http
-      .get<Record<string, unknown>[]>(param.url)
+    this.dropdownData
+      .getOptions(url)
+      .pipe(
+        map((response) =>
+          response.map((x) => ({ label: x[labelKey], value: x[valueKey] })),
+        ),
+      )
       .subscribe((response) => {
         this.tileState.update((state) => ({
           ...state,
           dropdownOptions: {
             ...state.dropdownOptions,
-            [param.id]: response.map((x) => ({
-              label: x[param.labelKey],
-              value: x[param.valueKey],
-            })),
+            [id]: response,
           },
         }))
       })
@@ -74,6 +79,7 @@ export class TileItemStore {
   private getRequestBody() {
     return this.tileState().tile.params.reduce(
       (body, param) => ({ ...body, [param.field]: param.value }),
+
       {},
     )
   }

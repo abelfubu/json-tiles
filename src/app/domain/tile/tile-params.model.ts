@@ -1,20 +1,4 @@
-interface BaseTileParams {
-  id: string
-  label: string
-  field: string
-  type: 'text' | 'checkbox' | 'number'
-  value?: string | boolean | number
-}
-
-interface SelectTileParams {
-  id: string
-  label: string
-  field: string
-  type: 'select'
-  url: string
-  labelKey: string
-  valueKey: string
-  value?: string | boolean | number
-}
+import { BaseTileParams } from './base-tile-params.model'
+import { SelectTileParams } from './select-tile-params.model'
 
 export type TileParams = BaseTileParams | SelectTileParams

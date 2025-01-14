@@ -58,6 +58,15 @@
           "field": "spicy",
           "type": "checkbox",
           "value": false
+        },
+        {
+          "label": "Cliente",
+          "field": "client",
+          "type": "select",
+          "url": "https://jsonplaceholder.typicode.com/users?limit=10",
+          "labelKey": "name",
+          "valueKey": "id",
+          "value": "Id del cliente"
         }
       ]
     }

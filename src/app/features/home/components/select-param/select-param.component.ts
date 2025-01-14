@@ -1,4 +1,11 @@
-import { Component, effect, inject, input } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  OnInit,
+} from '@angular/core'
+import { SelectTileParams } from '@domain/tile/select-tile-params.model'
 import { TileParams } from '@domain/tile/tile-params.model'
 import { ParamComponent } from '@features/home/models/param-component.model'
 import { TileItemStore } from '../tile-item/tile-item.store'
@@ -20,14 +27,15 @@ import { TileItemStore } from '../tile-item/tile-item.store'
       gap: 0.2rem;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectParamComponent implements ParamComponent {
+export class SelectParamComponent implements OnInit, ParamComponent {
   protected readonly store = inject(TileItemStore)
   readonly param = input.required<TileParams>()
 
-  load = effect(() => {
-    this.store.getDropdownOptions(this.param())
-  })
+  ngOnInit(): void {
+    this.store.getDropdownOptions(this.param() as SelectTileParams)
+  }
 
   update(value: string): void {
     this.store.updateParam(this.param().id, value)
