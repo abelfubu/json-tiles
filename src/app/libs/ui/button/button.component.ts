@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
 
 @Component({
-  selector: 'button[jt-button]',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'button[wbf-button]',
   template: `<ng-content />`,
   styles: `
     :host {

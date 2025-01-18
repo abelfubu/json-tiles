@@ -27,7 +27,7 @@
     },
     {
       "title": "Activar feature",
-      "url": "/api/features/new-feature",
+      "url": "https://jsonplaceholder.typicode.com/users",
       "method": "POST",
       "params": [
         {

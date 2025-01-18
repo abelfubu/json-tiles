@@ -4,7 +4,7 @@ import { ParamComponent } from '@features/home/models/param-component.model'
 import { TileItemStore } from '../tile-item/tile-item.store'
 
 @Component({
-  selector: 'jt-checkbox-param',
+  selector: 'wbf-checkbox-param',
   template: `
     <input
       #input

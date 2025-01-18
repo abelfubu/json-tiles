@@ -4,12 +4,12 @@ import { HeaderComponent } from '@libs/ui/header/header.component'
 import { LoaderComponent } from '@libs/ui/loader/loader.component'
 
 @Component({
-  selector: 'jt-root',
+  selector: 'wbf-root',
   imports: [RouterOutlet, HeaderComponent, LoaderComponent],
   template: `
-    <header jt-header></header>
+    <header wbf-header></header>
     <router-outlet />
-    <jt-loader />
+    <wbf-loader />
   `,
 })
 export class AppComponent {}

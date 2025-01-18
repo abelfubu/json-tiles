@@ -11,9 +11,10 @@ import { TextParamComponent } from '../text-param/text-param.component'
 import { TileItemStore } from './tile-item.store'
 
 @Component({
-  selector: 'jt-tile',
+  selector: 'wbf-tile',
   imports: [ButtonComponent, NgComponentOutlet],
   providers: [TileItemStore],
+  host: { ['data-testid']: 'tile-item' },
   template: `
     <h3>{{ tile().title }}</h3>
 
@@ -24,7 +25,7 @@ import { TileItemStore } from './tile-item.store'
     </div>
 
     <div class="tile-actions">
-      <button jt-button class="align-end" (click)="store.onAccept(tile())">
+      <button wbf-button class="align-end" (click)="store.onAccept(tile())">
         Aceptar
       </button>
     </div>
@@ -34,7 +35,7 @@ import { TileItemStore } from './tile-item.store'
     :host {
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px 0 light-dark(#0001, #0005);
       padding: 1rem;
       border-radius: 0.2rem;
 

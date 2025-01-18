@@ -3,12 +3,13 @@ import { TilesService } from '@core/services/tiles.service'
 import { TileComponent } from './components/tile-item/tile-item.component'
 
 @Component({
-  selector: 'section[jt-home]',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'section[wbf-home]',
   imports: [TileComponent],
   template: `
     @for (tile of store.tiles(); track tile.id) {
       @defer (on viewport) {
-        <jt-tile [tile]="tile" />
+        <wbf-tile [tile]="tile" />
       } @placeholder {
         <div class="tile-skeleton">
           <span></span>

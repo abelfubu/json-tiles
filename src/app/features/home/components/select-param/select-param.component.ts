@@ -11,7 +11,7 @@ import { ParamComponent } from '@features/home/models/param-component.model'
 import { TileItemStore } from '../tile-item/tile-item.store'
 
 @Component({
-  selector: 'jt-select-param',
+  selector: 'wbf-select-param',
   template: `
     <label [for]="param().id">{{ param().label }}</label>
     <select #select [id]="param().id" (change)="update(select.value)">
@@ -29,7 +29,7 @@ import { TileItemStore } from '../tile-item/tile-item.store'
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectParamComponent implements OnInit, ParamComponent {
+export class SelectParamComponent implements ParamComponent, OnInit {
   protected readonly store = inject(TileItemStore)
   readonly param = input.required<TileParams>()
 

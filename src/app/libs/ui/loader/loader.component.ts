@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { LoaderStore } from '@core/stores/loader.store'
 
 @Component({
-  selector: 'jt-loader',
+  selector: 'wbf-loader',
   template: `
     @if (store.loading()) {
       <div class="loader">

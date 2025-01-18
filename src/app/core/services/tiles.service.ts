@@ -26,4 +26,10 @@ export class TilesService {
       }),
     )
   }
+
+  send(tile: Tile, body: unknown) {
+    const method = tile.method.toLowerCase()
+
+    return this.http.request(method, tile.url, { body })
+  }
 }

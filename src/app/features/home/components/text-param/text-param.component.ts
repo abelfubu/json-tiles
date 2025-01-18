@@ -4,7 +4,7 @@ import { ParamComponent } from '@features/home/models/param-component.model'
 import { TileItemStore } from '../tile-item/tile-item.store'
 
 @Component({
-  selector: 'jt-text-param',
+  selector: 'wbf-text-param',
   template: `
     <label [for]="param().id">{{ param().label }}</label>
     <input
